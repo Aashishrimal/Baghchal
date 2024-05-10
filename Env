@@ -1,0 +1,214 @@
+class BaghchalBoard:
+    def __init__(self):
+        # Initialize a 5x5 grid for the Baghchal board
+        self.board = [['.' for _ in range(5)] for _ in range(5)]
+        # Place the initial position of the tigers and goats on the board
+        self.board[0][0] = 'T'
+        self.board[0][4] = 'T' 
+        self.board[4][0] = 'T'
+        self.board[4][4] = 'T'
+        
+        self.goats_placed = 0  # Keep track of the number of goats placed
+        self.goats_killed= 0  # Keep track of the number of goats remaining in board
+        self.turn = 'G'  # 'T' for Tiger, 'G' for Goat
+        self.state_history=[]
+        self.n= 5
+        self.selected_goat = None 
+        self.selected_tiger = None  
+    
+        
+    def display_board(self):
+        # Display the current state of the Baghchal board
+        for row in self.board:
+            print(' '.join(row))
+        print()
+        
+    def is_valid_move(self, start_row,start_col,end_row,end_col):
+        
+        if self.board[end_row][end_col] != '.':
+            return False
+          
+            
+        # Perform piece-specific move validation
+        if self.turn == 'T':
+            return self.validate_tiger_move(start_row, start_col, end_row, end_col)
+        if self.turn == 'G':
+            return self.validate_goat_move(start_row, start_col, end_row, end_col)
+
+
+    def is_even(self,number):
+         return number % 2 == 0
+        
+   
+
+
+    def validate_tiger_move(self, start_row, start_col, end_row, end_col):
+        
+        # Function to validate tiger move
+            if  self.board[start_row][start_col] != 'T':
+                return False 
+        
+            
+            #Tigers can move one square horizontally or vertically.
+            if abs(start_row - end_row) == 1 and start_col == end_col:
+                return True 
+            if self.is_even(start_row+start_col):
+                if abs(start_row - end_row) == 1 and abs(start_col - end_col) == 1:
+                    return True
+
+            if abs(start_col - end_col) == 1 and start_row == end_row:
+                return True
+
+ 
+            
+                
+            if abs(start_row - end_row) == 2 and start_col ==end_col:
+                jump_row = (start_row + end_row) // 2
+                jump_col = start_col 
+
+                if self.board[jump_row][jump_col] == 'G':
+                    return True
+
+        
+            if start_row ==end_row and abs(start_col - end_col) == 2:
+                jump_row = start_row 
+                jump_col = (start_col + end_col) // 2
+
+                if self.board[jump_row][jump_col] == 'G':
+                    return True
+
+                        # Check for jump move (over goat) in all diagonal directions
+            if self.is_even(start_row+start_col): # to avoid the diagonal move if the positional sum is odd
+                if abs(start_row - end_row) == 2 and abs(start_col - end_col) == 2:
+
+                    jump_row =(start_row + end_row) //2
+                    jump_col =(start_col + end_col) // 2
+
+                    if self.board[jump_row][jump_col] == 'G':
+                        return True
+
+
+        
+
+            #print('Invalid tiger move')
+            return False
+
+    def validate_goat_move(self, start_row, start_col, end_row, end_col):
+        
+        
+        if self.goats_placed<20 and baghchal.board[start_row][start_col]!='.':
+            return False 
+        # Function to validate goat move
+        if self.goats_placed==20 and baghchal.board[start_row][start_col]!='G':
+            return False 
+        # Goats can move one square horizontally or vertically or diagonally.
+        if abs(start_row - end_row) == 1 and start_col == end_col:
+            return True
+        if abs(start_col - end_col) == 1 and start_row == end_row:
+            return True
+        
+        if self.is_even(start_row+start_col): 
+            if abs(start_col - end_col) == 1 and abs(start_row - end_row) == 1:
+                return True
+        
+        if self.goats_placed<20 and self.turn=="G" and start_row==end_row and start_col==end_col:
+            return True
+            
+        
+        #print('invalid goat move')
+        return False
+    
+
+    def make_move(self, start_row,start_col,end_row, end_col):
+        
+
+       
+       
+        if self.is_valid_move(start_row,start_col,end_row,end_col):
+                self.valid_move = True
+                # If it's the goat's turn and goats are available to be placed, perform placement
+                if  self.goats_placed<20 and self.turn=='G':
+                    self.board[end_row][end_col] = 'G'
+                    self.goats_placed += 1
+
+
+
+                 # Remove the goat if the tiger captured it
+                if self.board[start_row][start_col] == 'T': 
+            #        if isinstance((start_row + end_row) /2, int):
+                    jump_row = (start_row + end_row) //2
+             #       if isinstance((start_col + end_col) /2, int):   
+                    jump_col = (start_col + end_col) // 2
+                    if self.board[jump_row][jump_col] == 'G':
+                        self.board[jump_row][jump_col] = '.'
+                        self.goats_killed = self.goats_killed+1
+
+
+                self.board[start_row][start_col] = '.'
+                self.board[end_row][end_col] = self.turn
+
+                        
+                        
+                    
+                
+                
+
+                # Switch turn to the other player
+                self.turn = 'T' if self.turn == 'G' else 'G'
+        else :
+            self.valid_move=False
+        
+        
+    def check_loop(self):  ### code not correct ####
+        # Function to check for loops in the last n game states
+
+        # Get the current board state
+        current_state = tuple(tuple(row) for row in self.board)
+
+        # Check if the current state has been encountered in the last n states
+        if current_state in self.state_history:
+            return True
+
+        # Add the current state to the state history list
+        self.state_history.append(current_state)
+
+
+        return False
+
+    def check_win_conditions(self):
+        
+
+
+        if self.turn == 'T':
+            valid_tiger_moves = any(
+                self.is_valid_move(row, col, new_row, new_col)
+                for row in range(5)
+                for col in range(5)
+                if self.board[row][col] == 'T'
+                for new_row in range(max(0, row - 2), min(5, row + 3))
+                for new_col in range(max(0, col - 2), min(5, col + 3))
+            )
+    
+            if not valid_tiger_moves:
+                return 'Goat'
+            
+
+        # Check if goats have no valid moves (Tigers win)
+        if self.turn =='G':
+        
+            valid_goat_moves =  any(self.is_valid_move( row, col, new_row, new_col)  
+                                    for row in range(5) for col in range(5)
+                                    for new_row in range(max(0, row - 2), min(5, row + 3))
+                                    for new_col in range(max(0, col - 2), min(5, col + 3)))
+
+        
+            if not valid_goat_moves:
+                return 'Tiger'
+
+
+        if self.goats_killed == 5 :
+            return "Tiger"
+
+
+
+
