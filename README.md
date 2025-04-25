@@ -27,7 +27,8 @@ To provide a **publicly accessible** RL-compatible environment where researchers
 
 - **Customizable observation and action spaces**
 - **Turn-based mechanics** supporting both Tiger and Goat agents
-- **Reward structure** that can be extended for multi-agent learning
+- **Reward structure**  Not implemented . Reward structure can  be varied  on own will.
+- **Action Space**  Not implemented. 
 
 ---
 
@@ -38,19 +39,6 @@ To provide a **publicly accessible** RL-compatible environment where researchers
 ```bash
 git clone https://github.com/Aashishrimal/Baghchal.git
 cd Baghchal
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-(Optional) Create and activate a virtual environment:
-
-```bash
-python -m venv venv
-source venv/bin/activate       # On Windows: venv\Scripts\activate
 ```
 
 ### 2. Launch the GUI
