@@ -23,6 +23,8 @@ To provide a **publicly accessible** RL-compatible environment where researchers
 - **Turn-based mechanics** supporting both Tiger and Goat agents
 - **Reward structure** that can be extended for multi-agent learning
 
+'''
+
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
