@@ -1,7 +1,16 @@
+Ah! I see what happened — you included the `README.md` **inside a code block** (```markdown ... ```), which means GitHub renders the **entire thing as a code snippet** instead of actually rendering the markdown elements like headers, bold text, lists, etc.
+
+### ✅ To fix this:
+You should **remove the outer triple backticks** (```` ```markdown ```` and the closing ``` at the end) when you paste it into your actual `README.md` file.
 
 ---
 
-```markdown
+### ✅ Final `README.md` (ready to paste directly into your repo)
+
+Here’s the version **without the outer code block**:
+
+---
+
 # 🐯 Bagh-Chal Reinforcement Learning Environment
 
 A custom reinforcement learning environment for the traditional Nepali board game **Bagh-Chal (Tiger and Goats)**.  
@@ -33,9 +42,6 @@ To provide a **publicly accessible** RL-compatible environment where researchers
 
 ---
 
-
-
-
 ## 🚀 Getting Started
 
 ### 1. Setup Python Environment
@@ -45,6 +51,18 @@ git clone https://github.com/Aashishrimal/Baghchal.git
 cd Baghchal
 ```
 
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+(Optional) Create and activate a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate       # On Windows: venv\Scripts\activate
+```
 
 ### 2. Launch the GUI
 
@@ -81,10 +99,9 @@ It is played between two players: one controls **four tigers**, and the other co
 
 ## ✨ Future Plans
 
-- ✅ Gym-compatible environment wrapper
-- ✅ Custom reward system for RL training 
-- ⏳ Sample RL agent implementations (DQN, PPO)
+- ✅ Gym-compatible environment wrapper  
+- ✅ Custom reward system for RL training  
+- ⏳ Sample RL agent implementations (DQN, PPO)  
 - ⏳ Enhanced GUI with agent playback and move visualization
-```
 
 ---
