@@ -2,7 +2,7 @@
 ```markdown
 # 🐯 Bagh-Chal Reinforcement Learning Environment
 
-A custom reinforcement learning environment for the traditional Nepali board game **Bagh-Chal (Tiger and Goats)**. This repository includes a playable GUI as well as a functional environment suitable for training reinforcement learning (RL) agents.
+A custom reinforcement learning environment for the traditional Nepali board game **Bagh-Chal (Tiger and Goats)**.   This repository includes a playable GUI as well as a functional environment suitable for training reinforcement learning (RL) agents.
 
 ## 📦 Contents
 
