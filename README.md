@@ -1,15 +1,4 @@
-Ah! I see what happened — you included the `README.md` **inside a code block** (```markdown ... ```), which means GitHub renders the **entire thing as a code snippet** instead of actually rendering the markdown elements like headers, bold text, lists, etc.
 
-### ✅ To fix this:
-You should **remove the outer triple backticks** (```` ```markdown ```` and the closing ``` at the end) when you paste it into your actual `README.md` file.
-
----
-
-### ✅ Final `README.md` (ready to paste directly into your repo)
-
-Here’s the version **without the outer code block**:
-
----
 
 # 🐯 Bagh-Chal Reinforcement Learning Environment
 
