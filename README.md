@@ -74,7 +74,3 @@ _Bagh-Chal_ (translates to "Tiger's Move") is a strategic board game originating
 - Enhanced GUI with agent playback
 
 ---
-
-```
-
-Let me know if you'd like this customized more or want me to generate a `requirements.txt` from the notebooks too.
